@@ -1,0 +1,8 @@
+timestamp,condition,event,detail
+1777062379.1623,wake_word_60cm_0_8_quiet,detected,
+1777062400.3891,wake_word_60cm_0_8_quiet,detected,
+1777062422.2859,wake_word_60cm_0_8_quiet,detected,
+1777062453.9220,wake_word_60cm_0_8_quiet,detected,
+1777062475.0509,wake_word_60cm_0_8_quiet,detected,
+1777062495.6442,wake_word_60cm_0_8_quiet,detected,
+1777062515.1313,wake_word_60cm_0_8_quiet,detected,
