@@ -1,0 +1,10 @@
+timestamp,condition,event,detail
+1777062093.6330,wake_word_30cm_0_8_quiet,detected,
+1777062110.6887,wake_word_30cm_0_8_quiet,detected,
+1777062129.0041,wake_word_30cm_0_8_quiet,detected,
+1777062147.8464,wake_word_30cm_0_8_quiet,detected,
+1777062165.8831,wake_word_30cm_0_8_quiet,detected,
+1777062186.0980,wake_word_30cm_0_8_quiet,detected,
+1777062204.1931,wake_word_30cm_0_8_quiet,detected,
+1777062223.8293,wake_word_30cm_0_8_quiet,detected,
+1777062242.6539,wake_word_30cm_0_8_quiet,detected,

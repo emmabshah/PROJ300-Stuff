@@ -1,0 +1,16 @@
+timestamp,condition,audio_duration_s,transcribe_time_s,realtime_factor,transcript
+1777057982.1608,small_model_translation,5.00,13.73,2.746,"Hello, my friend."
+1777058011.6354,small_model_translation,5.00,13.19,2.638,Don't leave me here.
+1777058045.2223,small_model_translation,5.00,11.87,2.374,How old are you?
+1777058076.9677,small_model_translation,5.00,12.46,2.492,I'd like to go to the beach.
+1777058110.8451,small_model_translation,5.00,12.96,2.591,(phone ringing) Today is Wednesday and tomorrow is Thursday.
+1777058138.2220,small_model_translation,5.00,12.08,2.417,Hello. My name is Freddy.
+1777058169.5257,small_model_translation,5.00,14.54,2.909,Love you too.
+1777058203.3437,small_model_translation,5.00,14.00,2.800,Can I add you?
+1777058228.6720,small_model_translation,5.00,12.40,2.479,I want to go to the beach.
+1777058257.2878,small_model_translation,5.00,12.94,2.587,Today is Wednesday and tomorrow is Thursday.
+1777058288.6794,small_model_translation,5.00,12.18,2.436,"Hello, my name is Freddie."
+1777058313.2062,small_model_translation,5.00,11.61,2.323,Where do you live?
+1777058344.9639,small_model_translation,5.00,14.33,2.866,I'm all right.
+1777058374.0535,small_model_translation,5.00,12.78,2.557,I would like to go to the beach.
+1777058409.4321,small_model_translation,5.00,12.33,2.465,Today is Wednesday and tomorrow is Thursday.
