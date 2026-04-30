@@ -1,0 +1,174 @@
+#include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
+
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
+
+#define SERVOMINTEST  50 // The actual servo 'minimum' was about 85, around 60 for MG996R
+#define SERVOMAXTEST  540 // The actual servo 'maximum' was about 500, anround 510 for MG996
+#define SERVOMIN 85
+#define SERVOMAX 500
+
+#define SERVOMINDEG0  120   // Left wing
+#define SERVOMAXDEG0  495
+
+#define SERVOMINDEG4  105   // Left eyelids 
+#define SERVOMAXDEG4  495
+#define SERVOMINDEG5  110   // Left tilt
+#define SERVOMAXDEG5  495
+#define SERVOMINDEG6  110   // Left pan
+#define SERVOMAXDEG6  495 
+
+#define SERVOMINDEG7  105   // Lower beak
+#define SERVOMAXDEG7  485 
+
+#define SERVOMINDEG8  100    // Right eyelids
+#define SERVOMAXDEG8  485
+#define SERVOMINDEG9  105     // Right tilt
+#define SERVOMAXDEG9  495
+#define SERVOMINDEG10  115    // Right pan
+#define SERVOMAXDEG10  495
+
+#define SERVOMINDEG14  105  // Neck 
+#define SERVOMAXDEG14  485
+
+#define SERVOMINDEG15  90
+#define SERVOMAXDEG15  470  // Right wing
+
+#define SERVO_FREQ 50 // Analog servos run at ~50 Hz updates
+
+// I am calibrating to find the proper pulse length that gives the proper 0-180 degree range I want.
+
+//General Set-up
+void setup() 
+{
+    Serial.begin(9600);
+
+    pwm.begin();
+    pwm.setOscillatorFrequency(27000000);
+    pwm.setPWMFreq(SERVO_FREQ);  // Analog servos run at ~50 Hz updates
+
+    delay(10);
+}
+
+void ServoMinMax() 
+{
+  static int servo = 0;  // persists between calls
+
+  for (int pulselen = SERVOMINTEST; pulselen <= SERVOMAXTEST; pulselen++) {
+    pwm.setPWM(servo, 0, pulselen);
+    Serial.println(pulselen);
+    delay(50);
+  }
+
+  delay(1000);
+
+  for (int pulselen = SERVOMAXTEST; pulselen >= SERVOMINTEST; pulselen--) { // <-- fixed condition
+    pwm.setPWM(servo, 0, pulselen);
+    Serial.println(pulselen);
+    delay(50);
+  }
+
+  delay(1000);
+
+  // advance to next servo (0,1,2,0,1,2...)
+  //servo++;
+  //if (servo > 2) servo = 0;
+} // For all 3 servos, min was 85 and max was 500.
+
+void PotMap()
+{
+  int pot0 = analogRead(A0);
+  int pot1 = analogRead(A1);
+  int pot2 = analogRead(A2);
+
+  int pulselen0 = map(pot0, 0, 1023, SERVOMINDEG14, SERVOMAXDEG14);
+  int pulselen1 = map(pot1, 0, 1023, SERVOMINDEG15, SERVOMAXDEG15);
+  int pulselen2 = map(pot2, 0, 1023, SERVOMINDEG0, SERVOMAXDEG0);
+
+  pwm.setPWM(14, 0, pulselen0);
+  pwm.setPWM(15, 0, pulselen1);
+  pwm.setPWM(0, 0, pulselen2);
+
+  Serial.print("pot0=");
+  Serial.print((pot0 * 180L) / 1023);
+  Serial.print(" pulselen0=");
+  Serial.print(pulselen0);
+
+  Serial.print(", pot1=");
+  Serial.print((pot1 * 180L) / 1023);
+  Serial.print(" pulselen1=");
+  Serial.print(pulselen1);
+
+  Serial.print(", pot2=");
+  Serial.print((pot2 * 180L) / 1023);
+  Serial.print(" pulselen2=");
+  Serial.println(pulselen2);
+
+  //delay(100);
+}
+
+// Servo can move 85 to 500 but that range was more than 180 degrees
+// Find actual servo 0-180 degree via trial and error by comparing to protractor
+void ServoAngle() 
+{
+    /*pwm.setPWM(4, 0, 105); 
+    delay(5000);
+    pwm.setPWM(4, 0, 495); 
+    delay(5000); */
+    // For instance, started off with 105 and 400, so I just kept changing values and comparing to protactor. 
+    // Did each servo at a time, commenting out, adjusting and re-running.
+
+    /*pwm.setPWM(5, 0, 110); 
+    delay(5000);
+    pwm.setPWM(5, 0, 495); 
+    delay(5000);*/
+
+    /*pwm.setPWM(6, 0, 110); 
+    delay(5000);
+    pwm.setPWM(6, 0, 495); 
+    delay(5000);*/
+
+    /*pwm.setPWM(8, 0, 100); 
+    delay(5000);
+    pwm.setPWM(8, 0, 485); 
+    delay(5000);*/
+
+    /*pwm.setPWM(9, 0, 105); 
+    delay(5000);
+    pwm.setPWM(9, 0, 495); 
+    delay(5000);*/
+
+    /*pwm.setPWM(10, 0, 115); 
+    delay(5000);
+    pwm.setPWM(10, 0, 495); 
+    delay(5000);*/
+
+    /*pwm.setPWM(7, 0, 105); 
+    delay(5000);
+    pwm.setPWM(7, 0, 485); 
+    delay(5000);*/
+
+    /*pwm.setPWM(15, 0, 90); 
+    delay(5000);
+    pwm.setPWM(15, 0, 475); 
+    delay(5000);*/
+
+    /*pwm.setPWM(0, 0, 120); 
+    delay(5000);
+    pwm.setPWM(0, 0, 495); 
+    delay(5000);*/ 
+
+    pwm.setPWM(14, 0, 105); 
+    delay(5000);
+    pwm.setPWM(14, 0, 485); 
+    delay(5000);
+}
+
+void loop ()
+{
+  // First did ServoMinMax, then ServoAngle, then PotMap each separately.
+  //ServoMinMax();
+  //ServoAngle();
+  PotMap();
+
+}
